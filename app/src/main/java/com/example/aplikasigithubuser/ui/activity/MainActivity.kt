@@ -142,19 +142,4 @@ class MainActivity : AppCompatActivity() {
             connectivityManager.activeNetworkInfo?.isConnected ?: false
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_bookmark -> {
-                startActivity(Intent(this, BookmarkActivity::class.java))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }
