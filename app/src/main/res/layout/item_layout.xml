@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardCornerRadius="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/abu"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/itemAvatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:contentDescription="@string/avatar"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="2dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/itemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                tools:text="@string/name" />
+
+            <TextView
+                android:id="@+id/itemType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                tools:text="@string/type" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/bookmarkButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_bookmarks"
+            android:padding="10dp"
+            android:layout_marginEnd="10dp"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

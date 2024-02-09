@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.AplikasiGitHubUser" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/abu_abu</item>
+        <item name="android:statusBarColor">@color/abu_abu</item>
+    </style>
+</resources>

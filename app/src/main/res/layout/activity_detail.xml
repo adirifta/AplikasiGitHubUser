@@ -1,0 +1,147 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/abu"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_back"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:contentDescription="@string/back_button_description"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/detailAvatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/backButton"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="35dp"
+        android:elevation="4dp"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        android:background="@drawable/circle_background"/>
+
+    <LinearLayout
+        android:id="@+id/followLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backButton"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_toEndOf="@+id/detailAvatar"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/followersCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Followers"
+                android:textColor="#000"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/followingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Following"
+                android:textColor="#000"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/detailUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/backButton"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:text="Username"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_below="@id/detailAvatar"
+        android:layout_marginTop="13dp"
+        android:layout_marginStart="35dp"
+        android:src="@drawable/ic_user_icon" />
+
+    <TextView
+        android:id="@+id/detailGithubName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detailAvatar"
+        android:layout_toEndOf="@+id/userIcon"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:textSize="15sp"
+        android:textColor="#000" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detailGithubName"
+        app:tabTextColor="@color/black"
+        app:tabIndicatorColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:background="@color/abu_abu"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        android:contentDescription="Tabs for different sections"
+        tools:ignore="SpeakableTextPresent"/>
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabs"/>
+
+    <ProgressBar
+        android:id="@+id/loadingIndicator"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/black"
+        tools:visibility="visible" />
+
+</RelativeLayout>
