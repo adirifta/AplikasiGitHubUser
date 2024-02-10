@@ -12,7 +12,7 @@ import com.example.aplikasigithubuser.databinding.FragmentFollowBinding
 import com.example.aplikasigithubuser.ui.UserAdapter
 import com.example.aplikasigithubuser.ui.UserViewModel
 
-class FollowFragment : Fragment() {
+class FollowFollowingFragment : Fragment() {
 
     private lateinit var binding: FragmentFollowBinding
     private lateinit var userViewModel: UserViewModel
@@ -33,20 +33,18 @@ class FollowFragment : Fragment() {
 
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 
-        userViewModel.listFollowers.observe(viewLifecycleOwner, Observer { followersList ->
-            userAdapter.updateData(followersList)
-        })
-
-        userViewModel.listFollowing.observe(viewLifecycleOwner, Observer { followingList ->
-            userAdapter.updateData(followingList)
-        })
-
         arguments?.let {
             val position = it.getInt(ARG_POSITION)
             val username = it.getString(ARG_USERNAME) ?: ""
             if (position == 1) {
+                userViewModel.listFollowers.observe(viewLifecycleOwner, Observer { followersList ->
+                    userAdapter.updateData(followersList)
+                })
                 userViewModel.fetchFollowers(username)
             } else {
+                userViewModel.listFollowing.observe(viewLifecycleOwner, Observer { followingList ->
+                    userAdapter.updateData(followingList)
+                })
                 userViewModel.fetchFollowing(username)
             }
         }

@@ -48,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000"
+                android:text="0"
                 android:textSize="18sp" />
 
             <TextView
@@ -70,6 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000"
+                android:text="0"
                 android:textSize="18sp" />
 
             <TextView
@@ -111,6 +113,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:textSize="15sp"
+        android:text="Name"
         android:textColor="#000" />
 
     <com.google.android.material.tabs.TabLayout
@@ -137,11 +140,19 @@
     <ProgressBar
         android:id="@+id/loadingIndicator"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:indeterminateTint="@color/black"
+        android:visibility="gone"
         tools:visibility="visible" />
 
+    <ImageView
+        android:id="@+id/errorIcon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_error"
+        android:visibility="gone" />
 </RelativeLayout>
