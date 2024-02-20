@@ -13,7 +13,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerInParent="true"
-        android:indeterminateTint="@color/dongker"
+        android:indeterminateTint="@color/navy"
         android:visibility="gone"
         tools:visibility="visible" />
 
@@ -24,7 +24,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/abu_abu"
@@ -32,11 +31,10 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
             <TextView
-                android:id="@+id/toolbarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Github User"
-                android:textColor="@android:color/white"
+                android:text="@string/github_user"
+                android:textColor="@color/navy"
                 android:textSize="25sp"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
@@ -72,5 +70,6 @@
         android:layout_gravity="center"
         android:layout_centerInParent="true"
         android:src="@drawable/ic_error"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:contentDescription="@string/icon_error"/>
 </RelativeLayout>

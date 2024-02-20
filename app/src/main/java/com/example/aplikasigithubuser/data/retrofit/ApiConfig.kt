@@ -1,8 +1,8 @@
 package com.example.aplikasigithubuser.data.retrofit
 
+import com.example.aplikasigithubuser.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,7 +12,7 @@ class ApiConfig {
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()
                 val requestHeaders = req.newBuilder()
-                    .addHeader("Authorization", "Bearer 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")
+                    .addHeader("Authorization", "token " + BuildConfig.API_KEY)
                     .build()
                 chain.proceed(requestHeaders)
             }
@@ -20,7 +20,7 @@ class ApiConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

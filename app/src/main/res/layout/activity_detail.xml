@@ -23,12 +23,10 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="35dp"
         android:elevation="4dp"
-        app:civ_border_color="#FFFFFF"
-        app:civ_border_width="2dp"
-        android:background="@drawable/circle_background"/>
+        app:civ_border_color="@color/white"
+        app:civ_border_width="2dp"/>
 
     <LinearLayout
-        android:id="@+id/followLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/backButton"
@@ -47,22 +45,22 @@
                 android:id="@+id/followersCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:text="0"
+                android:textColor="@color/black"
+                android:text="@string/_0"
                 android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Followers"
-                android:textColor="#000"
+                android:text="@string/followers"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -70,15 +68,15 @@
                 android:id="@+id/followingCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:text="0"
+                android:textColor="@color/black"
+                android:text="@string/_0"
                 android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Following"
-                android:textColor="#000"
+                android:text="@string/following"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
@@ -90,9 +88,9 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@id/backButton"
-        android:textColor="#000"
+        android:textColor="@color/black"
         android:textStyle="bold"
-        android:text="Username"
+        android:text="@string/username"
         android:textSize="24sp" />
 
     <ImageView
@@ -102,7 +100,8 @@
         android:layout_below="@id/detailAvatar"
         android:layout_marginTop="13dp"
         android:layout_marginStart="35dp"
-        android:src="@drawable/ic_user_icon" />
+        android:src="@drawable/ic_user_icon"
+        android:contentDescription="@string/icon_name" />
 
     <TextView
         android:id="@+id/detailGithubName"
@@ -113,8 +112,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:textSize="15sp"
-        android:text="Name"
-        android:textColor="#000" />
+        android:text="@string/name"
+        android:textColor="@color/black" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -127,7 +126,7 @@
         android:background="@color/abu_abu"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        android:contentDescription="Tabs for different sections"
+        android:contentDescription="@string/tabs_for_different_sections"
         tools:ignore="SpeakableTextPresent"/>
 
 
@@ -154,5 +153,6 @@
         android:layout_gravity="center"
         android:layout_centerInParent="true"
         android:src="@drawable/ic_error"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:contentDescription="@string/icon_error" />
 </RelativeLayout>

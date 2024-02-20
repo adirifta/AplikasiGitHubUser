@@ -6,13 +6,12 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
     }
 }
 
-rootProject.name = "Aplikasi GitHub User"
+rootProject.name = "Apk GitHub User"
 include(":app")
  

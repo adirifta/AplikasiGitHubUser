@@ -58,8 +58,8 @@ data class DetailUserResponse(
 	@field:SerializedName("organizations_url")
 	val organizationsUrl: String? = null,
 
-	@field:SerializedName("hireable")
-	val hireable: Any? = null,
+	@field:SerializedName("hire-able")
+	val iterable: Any? = null,
 
 	@field:SerializedName("starred_url")
 	val starredUrl: String? = null,
