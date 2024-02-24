@@ -15,15 +15,21 @@ class FollowingViewModel : ViewModel() {
 
     private val _errorState = MutableLiveData<Pair<Boolean, String>>()
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
+
     private fun handleFailure(message: String) {
         _errorState.value = Pair(true, message)
     }
 
     fun fetchFollowing(username: String) {
+        _isLoading.value = true
         val apiService = ApiConfig.getApiService()
         val followingCall = apiService.getUserFollowing(username)
         followingCall.enqueue(object : Callback<List<ItemsItem>> {
             override fun onResponse(call: Call<List<ItemsItem>>, response: Response<List<ItemsItem>>) {
+                _isLoading.value = false
                 if (response.isSuccessful) {
                     _listFollowing.value = response.body() ?: emptyList()
                 } else {
@@ -32,6 +38,7 @@ class FollowingViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
+                _isLoading.value = false
                 handleFailure("Network error occurred. Please check your internet connection.")
             }
         })

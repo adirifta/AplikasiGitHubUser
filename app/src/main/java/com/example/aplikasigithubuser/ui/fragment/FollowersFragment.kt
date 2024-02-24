@@ -34,6 +34,15 @@ class FollowersFragment : Fragment() {
 
         arguments?.let {
             val username = it.getString(ARG_USERNAME) ?: ""
+            followersViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+                isLoading?.let { isLoadingValue ->
+                    if (isLoadingValue) {
+                        binding.loadingIndicator.visibility = View.VISIBLE
+                    } else {
+                        binding.loadingIndicator.visibility = View.GONE
+                    }
+                }
+            }
             followersViewModel.listFollowers.observe(viewLifecycleOwner) { followersList ->
                 userAdapter.updateData(followersList)
             }

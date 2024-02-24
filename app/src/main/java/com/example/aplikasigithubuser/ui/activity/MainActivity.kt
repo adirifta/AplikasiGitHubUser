@@ -9,11 +9,13 @@ import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.aplikasigithubuser.R
 import com.example.aplikasigithubuser.data.response.ItemsItem
 import com.example.aplikasigithubuser.databinding.ActivityMainBinding
 import com.example.aplikasigithubuser.ui.UserAdapter
@@ -26,35 +28,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userViewModel: UserViewModel
     private var networkStatusReceiver: BroadcastReceiver? = null
     private var queryText: String? = null
+    private lateinit var loadingIndicator: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setupRecyclerView(emptyList())
-
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
-
         observeViewModel()
-
         setupSearchView()
-
-        fetchData()
-
         registerNetworkStatusReceiver()
-
-        checkConnectionStatus(userViewModel.isNetworkAvailable())
-    }
-
-    private fun checkConnectionStatus(networkAvailable: Boolean) {
-        if (isNetworkAvailable()) {
-            binding.errorIcon.visibility = View.GONE
-            Log.d("MainActivity", "200 OK - Connected to GitHub")
-        } else {
-            binding.errorIcon.visibility = View.VISIBLE
-            Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
-        }
+        checkConnectionStatus()
+        loadingIndicator = findViewById(R.id.loadingIndicator)
+        loadingIndicator.visibility = View.VISIBLE
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -65,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        checkConnectionStatus(userViewModel.isNetworkAvailable())
+        checkConnectionStatus()
     }
 
     override fun onDestroy() {
@@ -85,16 +72,14 @@ class MainActivity : AppCompatActivity() {
         userViewModel.userList.observe(this) { userList ->
             if (userList != null) {
                 recyclerViewAdapter.updateData(userList)
+                binding.loadingIndicator.visibility = View.GONE
             }
-        }
-
-        userViewModel.isLoading.observe(this) { isLoading ->
-            binding.loadingIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
         userViewModel.errorState.observe(this) { errorState ->
             if (errorState.first) {
                 Toast.makeText(this, errorState.second, Toast.LENGTH_SHORT).show()
+                binding.loadingIndicator.visibility = View.GONE
             }
         }
     }
@@ -106,17 +91,22 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText.isNullOrEmpty()) {
-                    resetSearchView()
-                } else {
+                if (!newText.isNullOrEmpty()) {
                     userViewModel.setSearchQuery(newText)
+                    queryText=newText
                     performSearch(newText)
+                } else {
+                    userViewModel.setSearchQuery("adi")
+                    queryText = ""
+                    resetSearchView()
                 }
                 return true
             }
         })
 
         binding.searchView.setOnCloseListener {
+            userViewModel.setSearchQuery("adi")
+            queryText = ""
             resetSearchView()
             true
         }
@@ -132,7 +122,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetSearchView() {
-        binding.loadingIndicator.visibility = View.GONE
         fetchData()
     }
 
@@ -140,8 +129,6 @@ class MainActivity : AppCompatActivity() {
         val query = userViewModel.searchQuery.value ?: "adi"
         if (isNetworkAvailable()) {
             userViewModel.fetchData(query)
-        } else {
-            binding.errorIcon.visibility = View.VISIBLE
         }
     }
 
@@ -150,11 +137,19 @@ class MainActivity : AppCompatActivity() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (isNetworkAvailable()) {
                     fetchData()
-                    checkConnectionStatus(userViewModel.isNetworkAvailable())
+                    checkConnectionStatus()
                 }
             }
         }
         registerReceiver(networkStatusReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
+
+    private fun checkConnectionStatus() {
+        if (isNetworkAvailable()) {
+            Log.d("MainActivity", "200 OK - Connected to GitHub")
+        } else {
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun unregisterNetworkStatusReceiver() {

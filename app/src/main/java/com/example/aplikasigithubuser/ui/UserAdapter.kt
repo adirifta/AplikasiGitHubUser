@@ -28,7 +28,6 @@ class UserAdapter(private var itemList: List<ItemsItem>) :
     }
 
     override fun getItemCount(): Int = itemList.size
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val avatarImageView: ImageView = itemView.findViewById(R.id.itemAvatar)
         private val usernameTextView: TextView = itemView.findViewById(R.id.itemName)

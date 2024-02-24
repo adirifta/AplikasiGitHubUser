@@ -10,9 +10,7 @@
     <string name="username">Username</string>
     <string name="tabs_for_different_sections">Tabs for different sections</string>
     <string name="icon_name">icon_name</string>
-    <string name="icon_error">error_icon</string>
     <string name="github_user">Github User</string>
     <string name="icon_github">Icon Github</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

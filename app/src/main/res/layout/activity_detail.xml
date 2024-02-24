@@ -27,17 +27,20 @@
         app:civ_border_width="2dp"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/backButton"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="40dp"
         android:layout_toEndOf="@+id/detailAvatar"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="true">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -58,8 +61,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginStart="30dp"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -129,30 +133,10 @@
         android:contentDescription="@string/tabs_for_different_sections"
         tools:ignore="SpeakableTextPresent"/>
 
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tabs"/>
 
-    <ProgressBar
-        android:id="@+id/loadingIndicator"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_centerInParent="true"
-        android:indeterminateTint="@color/black"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
-    <ImageView
-        android:id="@+id/errorIcon"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_centerInParent="true"
-        android:src="@drawable/ic_error"
-        android:visibility="gone"
-        android:contentDescription="@string/icon_error" />
 </RelativeLayout>

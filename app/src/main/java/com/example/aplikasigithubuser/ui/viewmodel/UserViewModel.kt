@@ -12,15 +12,12 @@ import retrofit2.Response
 
 class UserViewModel : ViewModel() {
     private var isNetworkAvailable: Boolean = false
+    private val _isLoading = MutableLiveData<Boolean>()
     private val _userList = MutableLiveData<List<ItemsItem>>()
     val userList: LiveData<List<ItemsItem>> get() = _userList
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> get() = _isLoading
-
     private val _errorState = MutableLiveData<Pair<Boolean, String>>()
     val errorState: LiveData<Pair<Boolean, String>> get() = _errorState
-
 
     private fun handleFailure(message: String) {
         _errorState.value = Pair(true, message)
@@ -28,10 +25,6 @@ class UserViewModel : ViewModel() {
 
     fun setNetworkAvailable(available: Boolean) {
         isNetworkAvailable = available
-    }
-
-    fun isNetworkAvailable(): Boolean {
-        return isNetworkAvailable
     }
 
     private val _searchQuery = MutableLiveData<String>()
