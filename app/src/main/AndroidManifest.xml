@@ -4,14 +4,15 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_github"
+        android:icon="@mipmap/ic_github1"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_github"
+        android:roundIcon="@mipmap/ic_github1"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApkGitHubUser"
         android:configChanges="orientation|screenSize"

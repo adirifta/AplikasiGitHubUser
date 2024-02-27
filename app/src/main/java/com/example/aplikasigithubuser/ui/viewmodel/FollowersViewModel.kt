@@ -28,7 +28,7 @@ class FollowersViewModel : ViewModel() {
         val apiService = ApiConfig.getApiService()
         val followersCall = apiService.getUserFollowers(username)
         followersCall.enqueue(object : Callback<List<ItemsItem>> {
-            override fun onResponse(call: Call<List<ItemsItem>>, response: Response<List<ItemsItem>>) {
+            override fun onResponse(ignoredCall: Call<List<ItemsItem>>, response: Response<List<ItemsItem>>) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     _listFollowers.value = response.body() ?: emptyList()
@@ -37,7 +37,7 @@ class FollowersViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
+            override fun onFailure(ignoredCall: Call<List<ItemsItem>>, ignoredT: Throwable) {
                 _isLoading.value = false
                 handleFailure("Network error occurred. Please check your internet connection.")
             }

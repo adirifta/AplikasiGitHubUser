@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:keep="@layout/fragment_follow">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFollow"

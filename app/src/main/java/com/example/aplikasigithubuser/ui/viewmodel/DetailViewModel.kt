@@ -57,7 +57,7 @@ class DetailViewModel : ViewModel() {
         val apiService = ApiConfig.getApiService()
         val followersCall = apiService.getUserFollowers(username)
         followersCall.enqueue(object : Callback<List<ItemsItem>> {
-            override fun onResponse(call: Call<List<ItemsItem>>, response: Response<List<ItemsItem>>) {
+            override fun onResponse(ignoredCall: Call<List<ItemsItem>>, response: Response<List<ItemsItem>>) {
                 if (response.isSuccessful) {
                     val followersList = response.body()
                     followersList?.let {
@@ -69,7 +69,7 @@ class DetailViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
+            override fun onFailure(ignoredCall: Call<List<ItemsItem>>, t: Throwable) {
                 _error.value = "Followers API call failed: ${t.message}"
             }
         })
@@ -79,7 +79,7 @@ class DetailViewModel : ViewModel() {
         val apiService = ApiConfig.getApiService()
         val followingCall = apiService.getUserFollowing(username)
         followingCall.enqueue(object : Callback<List<ItemsItem>> {
-            override fun onResponse(call: Call<List<ItemsItem>>, response: Response<List<ItemsItem>>) {
+            override fun onResponse(ignoredCall: Call<List<ItemsItem>>, response: Response<List<ItemsItem>>) {
                 if (response.isSuccessful) {
                     val followingList = response.body()
                     followingList?.let {
@@ -91,7 +91,7 @@ class DetailViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
+            override fun onFailure(ignoredCall: Call<List<ItemsItem>>, t: Throwable) {
                 _error.value = "Following API call failed: ${t.message}"
             }
         })

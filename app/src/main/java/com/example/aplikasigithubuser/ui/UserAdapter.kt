@@ -1,5 +1,6 @@
 package com.example.aplikasigithubuser.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -54,6 +55,7 @@ class UserAdapter(private var itemList: List<ItemsItem>) :
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newItemList: List<ItemsItem>) {
         itemList = newItemList
         notifyDataSetChanged()
