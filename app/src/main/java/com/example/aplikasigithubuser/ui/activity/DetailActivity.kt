@@ -2,6 +2,7 @@ package com.example.aplikasigithubuser.ui.activity
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,7 @@ class DetailActivity : AppCompatActivity() {
         if (username != null) {
             setupViewPager(username)
             viewModel.fetchUserDetails(username)
+            binding.loadingIndicator.visibility = View.VISIBLE
         }
 
         val backButton: ImageView = findViewById(R.id.backButton)
@@ -82,6 +84,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun updateFollowersCount(count: Int) {
         binding.followersCount.text = "$count"
+        binding.loadingIndicator.visibility = View.GONE
     }
 
     private fun updateFollowingCount(count: Int) {

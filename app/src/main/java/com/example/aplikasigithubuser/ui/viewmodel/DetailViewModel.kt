@@ -25,8 +25,10 @@ class DetailViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    fun fetchUserDetails(username: String) {
+    private val _isLoading = MutableLiveData<Boolean>()
 
+    fun fetchUserDetails(username: String) {
+        _isLoading.value = true
         val apiService = ApiConfig.getApiService()
 
         val userDetailsCall = apiService.getUserDetails(username)
@@ -48,6 +50,7 @@ class DetailViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
+                _isLoading.value = false
                 _error.value = "API call failed: ${t.message}"
             }
         })

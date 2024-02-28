@@ -5,9 +5,7 @@
     <string name="type">Type</string>
     <string name="back_button_description" tools:keep="@string/back_button_description">Back</string>
     <string name="followers" tools:keep="@string/followers">Followers</string>
-    <string name="_0" tools:keep="@string/_0">0</string>
     <string name="following" tools:keep="@string/following">Following</string>
-    <string name="username" tools:keep="@string/username">Username</string>
     <string name="tabs_for_different_sections" tools:keep="@string/tabs_for_different_sections">Tabs for different sections</string>
     <string name="icon_name" tools:keep="@string/icon_name">icon_name</string>
     <string name="github_user">Github User</string>
