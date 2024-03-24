@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aplikasigithubuser.R
+import com.example.aplikasigithubuser.data.database.FavoriteUser
 import com.example.aplikasigithubuser.data.response.DetailUserResponse
 import com.example.aplikasigithubuser.databinding.ActivityDetailBinding
 import com.example.aplikasigithubuser.ui.SectionsPagerAdapter
@@ -20,6 +21,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var sectionsPagerAdapter: SectionsPagerAdapter
     private val viewModel: DetailViewModel by viewModels()
 
+    private var isFavorite: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -61,7 +63,12 @@ class DetailActivity : AppCompatActivity() {
                 Log.e("DetailActivity", errorMessage)
             }
         }
+
+        binding.favoriteButton.setOnClickListener {
+            toggleFavoriteStatus()
+        }
     }
+
 
     private fun displayUserDetails(userDetail: DetailUserResponse) {
         binding.detailUsername.text = userDetail.login
@@ -89,5 +96,24 @@ class DetailActivity : AppCompatActivity() {
 
     private fun updateFollowingCount(count: Int) {
         binding.followingCount.text = "$count"
+    }
+
+    private fun toggleFavoriteStatus() {
+        val login = intent.getStringExtra("USERNAME") ?: ""
+        if (isFavorite) {
+            // Jika sudah ditandai sebagai favorit, hapus dari daftar favorit
+            viewModel.deleteFavoriteUser(createFavoriteUser(login))
+            binding.favoriteButton.setImageResource(R.drawable.ic_favorite_border)
+        } else {
+            // Jika belum ditandai sebagai favorit, tambahkan ke daftar favorit
+            viewModel.insertFavoriteUser(createFavoriteUser(login))
+            binding.favoriteButton.setImageResource(R.drawable.ic_favorite)
+        }
+        isFavorite = !isFavorite
+    }
+
+    private fun createFavoriteUser(login: String): FavoriteUser {
+        val avatarUrl = "avatarUrl" // Sesuaikan dengan URL avatar yang benar
+        return FavoriteUser(login = login, avatarUrl = avatarUrl, isFavorite = !isFavorite)
     }
 }

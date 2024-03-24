@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconLauncherShape">
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-hdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-hdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-hdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-hdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-hdpi/ic_github_icon.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-mdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-mdpi/ic_github_icon.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-xhdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-xhdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-xhdpi/ic_github_icon.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-xxhdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-xxhdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-xxhdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-xxxhdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-xxxhdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-xxxhdpi/ic_github.webp" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/mipmap-xxxhdpi/ic_github_icon.webp" />
+    </issue>
+    <issue id="IconLocation">
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/drawable/ic_github_ss.png" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/drawable/ic_user_icon.png" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/drawable/ic_user_icon.png" />
+        <ignore path="D:/---- Pelatihan -----/Tugas Dicoding Kotlin/Android/AplikasiGitHubUser/app/src/main/res/drawable/ic_user_icon.png" />
+    </issue>
+</lint>

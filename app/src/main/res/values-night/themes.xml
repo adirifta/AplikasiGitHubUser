@@ -1,7 +1,9 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.ApkGitHubUser" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/abu_abu</item>
+        <item name="colorPrimary">@color/navy</item>
         <item name="android:statusBarColor">@color/abu_abu</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/black</item>
     </style>
 </resources>

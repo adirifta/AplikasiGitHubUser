@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/abu"
+    android:background="?attr/colorPrimary"
     tools:context=".ui.activity.MainActivity"
     tools:ignore="UnusedResources">
 
@@ -14,12 +14,14 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/abu_abu"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:menu="@menu/main_menu">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -28,7 +30,8 @@
                 android:textColor="@color/navy"
                 android:textSize="25sp"
                 android:textStyle="bold" />
-        </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.appcompat.widget.SearchView
@@ -60,7 +63,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerInParent="true"
-        android:indeterminateTint="@color/navy"
+        android:indeterminateTint="?android:attr/textColorPrimary"
         android:visibility="gone"
         tools:visibility="visible" />
 </RelativeLayout>

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
         android:allowBackup="true"
+        android:configChanges="orientation|screenSize"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_github1"
@@ -15,8 +16,13 @@
         android:roundIcon="@mipmap/ic_github1"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApkGitHubUser"
-        android:configChanges="orientation|screenSize"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".ui.activity.FavoriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.SettingsActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.SplashScreen"
             android:exported="true">
