@@ -1,16 +1,22 @@
 package com.example.aplikasigithubuser.ui.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.aplikasigithubuser.data.FavoriteUserRepository
+import com.example.aplikasigithubuser.data.database.FavoriteUser
 import com.example.aplikasigithubuser.data.response.DetailUserResponse
 import com.example.aplikasigithubuser.data.response.ItemsItem
 import com.example.aplikasigithubuser.data.retrofit.ApiConfig
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(application: Application) : AndroidViewModel(application) {
+    constructor() : this(Application())
 
     private val _userDetails = MutableLiveData<DetailUserResponse>()
     val userDetails: LiveData<DetailUserResponse> = _userDetails
@@ -98,5 +104,36 @@ class DetailViewModel : ViewModel() {
                 _error.value = "Following API call failed: ${t.message}"
             }
         })
+    }
+
+    private val repository: FavoriteUserRepository = FavoriteUserRepository(application)
+
+    private val mFavoriteUserRepository: FavoriteUserRepository = FavoriteUserRepository(application)
+
+    fun insertFavoriteUser(favoriteUser: FavoriteUser) {
+        viewModelScope.launch {
+            mFavoriteUserRepository.insert(favoriteUser)
+        }
+    }
+
+    fun updateFavoriteUser(favoriteUser: FavoriteUser) {
+        viewModelScope.launch {
+            mFavoriteUserRepository.update(favoriteUser)
+        }
+    }
+
+    fun deleteFavoriteUser(favoriteUser: FavoriteUser) {
+        viewModelScope.launch {
+            mFavoriteUserRepository.delete(favoriteUser)
+        }
+    }
+
+    fun toggleFavoriteUser(username: String, isFavorite: Boolean) {
+        val favoriteUser = FavoriteUser(login = username, avatarUrl = "", isFavorite = isFavorite)
+        if (isFavorite) {
+            insertFavoriteUser(favoriteUser)
+        } else {
+            deleteFavoriteUser(favoriteUser)
+        }
     }
 }

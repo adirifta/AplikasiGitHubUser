@@ -1,10 +1,10 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/abu"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     tools:ignore="Overdraw"
     tools:keep="@layout/activity_detail">
 
@@ -15,29 +15,107 @@
         android:src="@drawable/ic_arrow_back"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:contentDescription="@string/back_button_description"/>
+        android:contentDescription="@string/back_button_description"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/detailAvatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/backButton"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="35dp"
         android:elevation="4dp"
         app:civ_border_color="@color/white"
-        app:civ_border_width="2dp"/>
+        app:civ_border_width="2dp"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="35dp"/>
+
+    <TextView
+        android:id="@+id/detailUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/backButton" />
+
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_user_icon"
+        android:contentDescription="@string/icon_name"
+        app:layout_constraintTop_toBottomOf="@id/detailAvatar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="13dp"
+        android:layout_marginStart="35dp" />
+
+    <TextView
+        android:id="@+id/detailGithubName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/detailAvatar"
+        app:layout_constraintStart_toEndOf="@id/userIcon"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:tabTextColor="@color/black"
+        app:tabIndicatorColor="@color/black"
+        android:background="@color/abu_abu"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:layout_constraintTop_toBottomOf="@id/detailGithubName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/tabs_for_different_sections"
+        tools:ignore="SpeakableTextPresent"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tabs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/loadingIndicator"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:indeterminateTint="?android:attr/textColorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/detailAvatar"
+        app:layout_constraintEnd_toEndOf="@+id/detailAvatar"
+        app:layout_constraintStart_toStartOf="@+id/detailAvatar"
+        app:layout_constraintTop_toTopOf="@id/detailAvatar"
+        tools:visibility="visible" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/backButton"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="40dp"
-        android:layout_toEndOf="@+id/detailAvatar"
+        android:layout_marginEnd="20dp"
+        android:baselineAligned="true"
         android:orientation="horizontal"
-        android:baselineAligned="true">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/detailAvatar"
+        app:layout_constraintTop_toBottomOf="@id/backButton">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -50,22 +128,22 @@
                 android:id="@+id/followersCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/followers"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="30dp"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -73,78 +151,28 @@
                 android:id="@+id/followingCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/following"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/detailUsername"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/favoriteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_toEndOf="@id/backButton"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="24sp" />
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_favorite_border"
+        android:backgroundTint="@color/abu_abu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/black"
+        android:contentDescription="@string/favorite_detail" />
 
-    <ImageView
-        android:id="@+id/userIcon"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_below="@id/detailAvatar"
-        android:layout_marginTop="13dp"
-        android:layout_marginStart="35dp"
-        android:src="@drawable/ic_user_icon"
-        android:contentDescription="@string/icon_name" />
-
-    <TextView
-        android:id="@+id/detailGithubName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detailAvatar"
-        android:layout_toEndOf="@+id/userIcon"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:textSize="15sp"
-        android:textColor="@color/black" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detailGithubName"
-        app:tabTextColor="@color/black"
-        app:tabIndicatorColor="@color/black"
-        android:layout_marginTop="16dp"
-        android:background="@color/abu_abu"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        android:contentDescription="@string/tabs_for_different_sections"
-        tools:ignore="SpeakableTextPresent"/>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tabs"/>
-
-    <ProgressBar
-        android:id="@+id/loadingIndicator"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="90dp"
-        android:layout_marginStart="45dp"
-        android:indeterminateTint="@color/navy"
-        android:visibility="gone"
-        tools:visibility="visible" />
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

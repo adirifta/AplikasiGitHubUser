@@ -5,4 +5,5 @@
     <color name="abu">#DDE6ED</color>
     <color name="abu_abu">#9DB2BF</color>
     <color name="navy">#27374D</color>
+    <attr name="Primary">#DDE6ED</attr>
 </resources>

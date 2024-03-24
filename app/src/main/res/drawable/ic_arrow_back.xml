@@ -4,7 +4,7 @@
     android:height="30dp"
     android:viewportWidth="24.0"
     android:viewportHeight="24.0"
-    android:tint="@android:color/black"
+    android:tint="?android:attr/textColorPrimary"
     tools:keep="@drawable/ic_arrow_back">
 
     <path

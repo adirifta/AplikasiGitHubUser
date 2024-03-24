@@ -23,7 +23,8 @@ import com.example.aplikasigithubuser.ui.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
     private lateinit var recyclerViewAdapter: UserAdapter
     private lateinit var userViewModel: UserViewModel
     private var networkStatusReceiver: BroadcastReceiver? = null
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupRecyclerView(emptyList())
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
@@ -42,6 +43,22 @@ class MainActivity : AppCompatActivity() {
         checkConnectionStatus()
         loadingIndicator = findViewById(R.id.loadingIndicator)
         loadingIndicator.visibility = View.VISIBLE
+
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_settings -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.action_favorite -> {
+                    val intent = Intent(this, FavoriteActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

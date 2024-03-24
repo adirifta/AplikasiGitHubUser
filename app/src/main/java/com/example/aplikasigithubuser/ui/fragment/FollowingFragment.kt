@@ -13,7 +13,8 @@ import com.example.aplikasigithubuser.ui.viewmodel.FollowingViewModel
 
 class FollowingFragment : Fragment() {
 
-    private lateinit var binding: FragmentFollowBinding
+    private var _binding: FragmentFollowBinding? = null
+    private val binding get() = _binding!!
     private lateinit var followingViewModel: FollowingViewModel
     private lateinit var userAdapter: UserAdapter
 
@@ -21,7 +22,7 @@ class FollowingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFollowBinding.inflate(inflater, container, false)
+        _binding = FragmentFollowBinding.inflate(inflater, container, false)
         return binding.root
     }
 
