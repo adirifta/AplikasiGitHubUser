@@ -18,9 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplikasigithubuser.R
 import com.example.aplikasigithubuser.data.response.ItemsItem
 import com.example.aplikasigithubuser.databinding.ActivityMainBinding
-import com.example.aplikasigithubuser.ui.UserAdapter
+import com.example.aplikasigithubuser.ui.adapter.UserAdapter
 import com.example.aplikasigithubuser.ui.viewmodel.UserViewModel
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null

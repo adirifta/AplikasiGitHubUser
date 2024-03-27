@@ -1,11 +1,13 @@
-    package com.example.aplikasigithubuser.ui
+    package com.example.aplikasigithubuser.ui.adapter
 
     import android.content.Context
+    import android.content.Intent
     import android.view.LayoutInflater
     import android.view.ViewGroup
     import androidx.recyclerview.widget.RecyclerView
     import com.example.aplikasigithubuser.data.database.FavoriteUser
     import com.example.aplikasigithubuser.databinding.ItemFavoriteBinding
+    import com.example.aplikasigithubuser.ui.activity.DetailActivity
     import com.squareup.picasso.Picasso
 
     class FavoriteAdapter(private val context: Context, private var userList: List<FavoriteUser>) :
@@ -30,6 +32,14 @@
                 Picasso.get().load(user.avatarUrl).into(binding.itemAvatar)
                 binding.itemName.text = user.login
                 binding.itemType.text = user.id.toString()
+                binding.root.setOnClickListener {
+                    val intent = Intent(context, DetailActivity::class.java).apply {
+                        putExtra(DetailActivity.EXTRA_ID, user.id)
+                        putExtra(DetailActivity.EXTRA_URL, user.avatarUrl)
+                        putExtra("USERNAME", user.login)
+                    }
+                    context.startActivity(intent)
+                }
             }
         }
 

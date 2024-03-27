@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.aplikasigithubuser.R
 import com.example.aplikasigithubuser.data.response.DetailUserResponse
 import com.example.aplikasigithubuser.databinding.ActivityDetailBinding
-import com.example.aplikasigithubuser.ui.SectionsPagerAdapter
+import com.example.aplikasigithubuser.ui.adapter.SectionsPagerAdapter
 import com.example.aplikasigithubuser.ui.viewmodel.DetailViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayoutMediator

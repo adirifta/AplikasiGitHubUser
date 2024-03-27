@@ -1,4 +1,4 @@
-package com.example.aplikasigithubuser.ui
+package com.example.aplikasigithubuser.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
