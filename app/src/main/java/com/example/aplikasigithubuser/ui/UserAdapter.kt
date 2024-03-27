@@ -36,12 +36,13 @@ class UserAdapter(private var itemList: List<ItemsItem>) :
                 val context: Context = binding.root.context
                 val intent = Intent(context, DetailActivity::class.java).apply {
                     putExtra("USERNAME", item.login)
+                    putExtra(DetailActivity.EXTRA_ID, item.id)
+                    putExtra(DetailActivity.EXTRA_URL, item.avatarUrl)
                 }
                 context.startActivity(intent)
             }
         }
     }
-
     @SuppressLint("NotifyDataSetChanged")
     fun updateData(newItemList: List<ItemsItem>) {
         itemList = newItemList

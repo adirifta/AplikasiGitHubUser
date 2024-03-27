@@ -4,20 +4,20 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.example.aplikasigithubuser.data.FavoriteUserRepository
+import com.example.aplikasigithubuser.data.database.FavoriteRoomDatabase
 import com.example.aplikasigithubuser.data.database.FavoriteUser
+import com.example.aplikasigithubuser.data.database.FavoriteUserDao
 import com.example.aplikasigithubuser.data.response.DetailUserResponse
 import com.example.aplikasigithubuser.data.response.ItemsItem
 import com.example.aplikasigithubuser.data.retrofit.ApiConfig
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DetailViewModel(application: Application) : AndroidViewModel(application) {
-    constructor() : this(Application())
-
     private val _userDetails = MutableLiveData<DetailUserResponse>()
     val userDetails: LiveData<DetailUserResponse> = _userDetails
 
@@ -27,11 +27,18 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
     private val _followingCount = MutableLiveData<Int>()
     val followingCount: LiveData<Int> = _followingCount
 
-
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
     private val _isLoading = MutableLiveData<Boolean>()
+
+    private var userDao: FavoriteUserDao? = null
+    private var userDb: FavoriteRoomDatabase? = null
+
+    init {
+        userDb = FavoriteRoomDatabase.getDatabase(application)
+        userDao = userDb?.favoriteUserDao()
+    }
 
     fun fetchUserDetails(username: String) {
         _isLoading.value = true
@@ -106,34 +113,18 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
         })
     }
 
-    private val repository: FavoriteUserRepository = FavoriteUserRepository(application)
-
-    private val mFavoriteUserRepository: FavoriteUserRepository = FavoriteUserRepository(application)
-
-    fun insertFavoriteUser(favoriteUser: FavoriteUser) {
-        viewModelScope.launch {
-            mFavoriteUserRepository.insert(favoriteUser)
+    fun addToFavorite(username: String, id: Int, avatarUrl: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = FavoriteUser(username, id, avatarUrl)
+            userDao?.addToFavorite(user)
         }
     }
 
-    fun updateFavoriteUser(favoriteUser: FavoriteUser) {
-        viewModelScope.launch {
-            mFavoriteUserRepository.update(favoriteUser)
-        }
-    }
+//    suspend fun checkUser(id: Int) = userDao?.checkUser(id)
 
-    fun deleteFavoriteUser(favoriteUser: FavoriteUser) {
-        viewModelScope.launch {
-            mFavoriteUserRepository.delete(favoriteUser)
-        }
-    }
-
-    fun toggleFavoriteUser(username: String, isFavorite: Boolean) {
-        val favoriteUser = FavoriteUser(login = username, avatarUrl = "", isFavorite = isFavorite)
-        if (isFavorite) {
-            insertFavoriteUser(favoriteUser)
-        } else {
-            deleteFavoriteUser(favoriteUser)
+    fun removeFromFavorite(id: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            userDao?.deleteUser(id)
         }
     }
 }

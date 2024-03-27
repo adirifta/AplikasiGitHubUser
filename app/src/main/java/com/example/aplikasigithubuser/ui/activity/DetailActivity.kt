@@ -1,17 +1,20 @@
 package com.example.aplikasigithubuser.ui.activity
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aplikasigithubuser.R
-import com.example.aplikasigithubuser.data.database.FavoriteUser
 import com.example.aplikasigithubuser.data.response.DetailUserResponse
 import com.example.aplikasigithubuser.databinding.ActivityDetailBinding
 import com.example.aplikasigithubuser.ui.SectionsPagerAdapter
 import com.example.aplikasigithubuser.ui.viewmodel.DetailViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 
@@ -20,14 +23,27 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var sectionsPagerAdapter: SectionsPagerAdapter
     private val viewModel: DetailViewModel by viewModels()
+    private var _isChecked = false
+    private lateinit var sharedPreferences: SharedPreferences
 
-    private var isFavorite: Boolean = false
+
+    companion object{
+        const val EXTRA_ID = "extra_id"
+        const val EXTRA_URL = "extra_url"
+        const val FAVORITE_PREFS = "favorite_prefs"
+        const val FAVORITE_STATUS = "favorite_status"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sharedPreferences = getSharedPreferences(FAVORITE_PREFS, Context.MODE_PRIVATE)
+
         val username = intent.getStringExtra("USERNAME")
+        val id = intent.getIntExtra(EXTRA_ID, 0)
+        val avatarUrl = intent.getStringExtra(EXTRA_URL)
 
         if (username != null) {
             setupViewPager(username)
@@ -64,11 +80,26 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-        binding.favoriteButton.setOnClickListener {
-            toggleFavoriteStatus()
+        _isChecked = sharedPreferences.getBoolean(FAVORITE_STATUS + id, false)
+        val favoriteButton: FloatingActionButton = findViewById(R.id.favoriteButton)
+        favoriteButton.setImageResource(if (_isChecked) R.drawable.ic_favorite else R.drawable.ic_favorite_border)
+
+        favoriteButton.setOnClickListener {
+            _isChecked = !_isChecked
+            if (_isChecked) {
+                if (avatarUrl != null && username != null) {
+                    viewModel.addToFavorite(username, id, avatarUrl)
+                }
+                favoriteButton.setImageResource(R.drawable.ic_favorite)
+                Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.removeFromFavorite(id)
+                favoriteButton.setImageResource(R.drawable.ic_favorite_border)
+                Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+            }
+            sharedPreferences.edit().putBoolean(FAVORITE_STATUS + id, _isChecked).apply()
         }
     }
-
 
     private fun displayUserDetails(userDetail: DetailUserResponse) {
         binding.detailUsername.text = userDetail.login
@@ -96,24 +127,5 @@ class DetailActivity : AppCompatActivity() {
 
     private fun updateFollowingCount(count: Int) {
         binding.followingCount.text = "$count"
-    }
-
-    private fun toggleFavoriteStatus() {
-        val login = intent.getStringExtra("USERNAME") ?: ""
-        if (isFavorite) {
-            // Jika sudah ditandai sebagai favorit, hapus dari daftar favorit
-            viewModel.deleteFavoriteUser(createFavoriteUser(login))
-            binding.favoriteButton.setImageResource(R.drawable.ic_favorite_border)
-        } else {
-            // Jika belum ditandai sebagai favorit, tambahkan ke daftar favorit
-            viewModel.insertFavoriteUser(createFavoriteUser(login))
-            binding.favoriteButton.setImageResource(R.drawable.ic_favorite)
-        }
-        isFavorite = !isFavorite
-    }
-
-    private fun createFavoriteUser(login: String): FavoriteUser {
-        val avatarUrl = "avatarUrl" // Sesuaikan dengan URL avatar yang benar
-        return FavoriteUser(login = login, avatarUrl = avatarUrl, isFavorite = !isFavorite)
     }
 }
