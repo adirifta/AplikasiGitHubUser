@@ -91,6 +91,9 @@ class MainActivity : AppCompatActivity() {
             if (userList != null) {
                 recyclerViewAdapter.updateData(userList)
                 binding.loadingIndicator.visibility = View.GONE
+                if (userList.isEmpty()) {
+                    Toast.makeText(this, "No users found.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -147,6 +150,8 @@ class MainActivity : AppCompatActivity() {
         val query = userViewModel.searchQuery.value ?: "adi"
         if (isNetworkAvailable()) {
             userViewModel.fetchData(query)
+        } else {
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
         }
     }
 

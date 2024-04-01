@@ -13,13 +13,14 @@ import com.example.aplikasigithubuser.ui.viewmodel.FavoriteViewModel
 
 class FavoriteActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityFavoriteBinding
+    private var _binding: ActivityFavoriteBinding? = null
+    private val binding get() = _binding!!
     private lateinit var favoriteAdapter: FavoriteAdapter
     private lateinit var viewModel: FavoriteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        binding = ActivityFavoriteBinding.inflate(layoutInflater)
+        _binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]

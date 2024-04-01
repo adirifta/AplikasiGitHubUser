@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.aplikasigithubuser.R
 import com.example.aplikasigithubuser.data.response.DetailUserResponse
 import com.example.aplikasigithubuser.databinding.ActivityDetailBinding
+import com.example.aplikasigithubuser.ui.activity.DetailActivity.Constants.FAVORITE_PREFS
+import com.example.aplikasigithubuser.ui.activity.DetailActivity.Constants.FAVORITE_STATUS
 import com.example.aplikasigithubuser.ui.adapter.SectionsPagerAdapter
 import com.example.aplikasigithubuser.ui.viewmodel.DetailViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -20,28 +22,32 @@ import com.squareup.picasso.Picasso
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailBinding
+    private var _binding: ActivityDetailBinding? = null
+    private val binding get() = _binding!!
     private lateinit var sectionsPagerAdapter: SectionsPagerAdapter
     private val viewModel: DetailViewModel by viewModels()
     private var _isChecked = false
     private lateinit var sharedPreferences: SharedPreferences
 
-
-    companion object{
-        const val EXTRA_ID = "extra_id"
-        const val EXTRA_URL = "extra_url"
+    object Constants {
+        const val EXTRA_USERNAME = "USERNAME"
         const val FAVORITE_PREFS = "favorite_prefs"
         const val FAVORITE_STATUS = "favorite_status"
     }
 
+    companion object{
+        const val EXTRA_ID = "extra_id"
+        const val EXTRA_URL = "extra_url"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
+        _binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences(FAVORITE_PREFS, Context.MODE_PRIVATE)
 
-        val username = intent.getStringExtra("USERNAME")
+        val username = intent.getStringExtra(Constants.EXTRA_USERNAME)
         val id = intent.getIntExtra(EXTRA_ID, 0)
         val avatarUrl = intent.getStringExtra(EXTRA_URL)
 
@@ -77,6 +83,7 @@ class DetailActivity : AppCompatActivity() {
         viewModel.error.observe(this) { errorMessage ->
             errorMessage?.let {
                 Log.e("DetailActivity", errorMessage)
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -123,9 +130,16 @@ class DetailActivity : AppCompatActivity() {
     private fun updateFollowersCount(count: Int) {
         binding.followersCount.text = "$count"
         binding.loadingIndicator.visibility = View.GONE
+        if (count == 0) {
+            Toast.makeText(this, "User has no followers.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun updateFollowingCount(count: Int) {
         binding.followingCount.text = "$count"
+        binding.loadingIndicator.visibility = View.GONE
+        if (count == 0) {
+            Toast.makeText(this, "User is not following anyone.", Toast.LENGTH_SHORT).show()
+        }
     }
 }

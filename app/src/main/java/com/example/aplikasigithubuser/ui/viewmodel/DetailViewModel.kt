@@ -1,6 +1,7 @@
 package com.example.aplikasigithubuser.ui.viewmodel
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -59,12 +60,14 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
                     fetchFollowingCount(username)
                 } else {
                     _error.value = "API call not successful. Code: ${response.code()}"
+                    Toast.makeText(getApplication(), "API call not successful. Code: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
                 _isLoading.value = false
                 _error.value = "API call failed: ${t.message}"
+                Toast.makeText(getApplication(), "API call failed: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -82,11 +85,13 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
                     }
                 } else {
                     _error.value = "Followers API call not successful. Code: ${response.code()}"
+                    Toast.makeText(getApplication(), "Followers API call not successful. Code: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(ignoredCall: Call<List<ItemsItem>>, t: Throwable) {
                 _error.value = "Followers API call failed: ${t.message}"
+                Toast.makeText(getApplication(), "Followers API call failed: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -104,11 +109,13 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
                     }
                 } else {
                     _error.value = "Following API call not successful. Code: ${response.code()}"
+                    Toast.makeText(getApplication(), "Following API call not successful. Code: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(ignoredCall: Call<List<ItemsItem>>, t: Throwable) {
                 _error.value = "Following API call failed: ${t.message}"
+                Toast.makeText(getApplication(), "Following API call failed: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -119,8 +126,6 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
             userDao?.addToFavorite(user)
         }
     }
-
-//    suspend fun checkUser(id: Int) = userDao?.checkUser(id)
 
     fun removeFromFavorite(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
